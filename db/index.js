@@ -20,7 +20,7 @@ const getProducts = (count, page) => {
   return Products.find().sort({id: 1}).limit(count)
 }
 const getProductData = (product_id) => {
-  return ProductsFeatures.find({ id: product_id })
+  return ProductsFeatures.findOne({ id: product_id }, {_id: 0})
 }
 const getStyles = (product_id) => {
   return Styles.find({ id: product_id })
