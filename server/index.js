@@ -1,10 +1,11 @@
-const path = require('path');
 const express = require('express');
-const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const path = require('path');
 const db = require('../db');
 const Products = require('../db/Products');
-const {getProducts, getProductData, getStyles, getRelated} = require('../db');
+const Styles = require('../db/Styles');
+const { getProducts, getProductData, getStyles, getRelated } = require('../db');
 
 const app = express();
 app.use(morgan('dev'));
@@ -16,9 +17,7 @@ app.get('/products', (req, res) => {
   const count = Number(req.query.count) || 5;
 
   getProducts(count, page)
-    .then((data) => {
-      res.status(200).json(data)
-    })
+    .then(data => res.status(200).json(data))
     .catch(err => res.status(404).send(err.message))
 })
 
