@@ -6,4 +6,4 @@ const relatedSchema = new mongoose.Schema({
 
 const Related = mongoose.model('Related', relatedSchema);
 
-export default Related;
+module.exports = Related;

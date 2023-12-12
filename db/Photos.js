@@ -7,4 +7,4 @@ const photoSchema = new mongoose.Schema({
 
 const Photos = mongoose.model('Photos', photoSchema);
 
-export default Photos;
+module.exports = Photos;

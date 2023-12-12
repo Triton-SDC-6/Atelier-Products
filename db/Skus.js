@@ -7,4 +7,4 @@ const skuSchema = new mongoose.Schema({
 
 const Skus = mongoose.model('Skus', skuSchema);
 
-export default Skus;
+module.exports = Skus;
