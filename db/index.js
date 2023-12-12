@@ -1,3 +1,6 @@
+require('dotenv').config();
+const Products = require('./Products');
+const Styles = require('./Styles');
 const mongoose = require('mongoose');
 
 const mongoURI = 'mongodb://localhost:27017/sdcproducts';

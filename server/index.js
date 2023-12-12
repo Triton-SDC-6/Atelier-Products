@@ -14,52 +14,57 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/products', (req, res) => {
-  const page = Number(req.query.page) || 1;
-  const count = Number(req.query.count) || 5;
+  const page = req.query.page || 1;
+  const count = req.query.count || 5;
 
   getProducts(count, page)
     .then(data => res.status(200).json(data))
-    .catch(err => res.status(404).send(err.message))
+    .catch(err => res.status(404).send(err.message, 'error fetching products'))
 })
 
 app.get('/products/:product_id', (req, res) => {
-  const product_id = Number(req.params.product_id);
+  const product_id = req.params.product_id;
 
   getProductData(product_id)
     .then((data) => {
-      if (!product_id) {
-        throw new Error('Invalid product id')
+      if (!data) {
+        response.send(404)
+      } else {
+        res.status(200).json(data)
       }
-      res.status(200).json(data)
     })
-    .catch(err => res.status(404).send(err.message))
+    .catch(err => res.status(500).send(err.message, 'error fetching product data'))
 })
 
 app.get('/products/:product_id/styles', (req, res) => {
-  const product_id = Number(req.params.product_id);
+  const product_id = req.params.product_id;
 
   getStyles(product_id)
     .then((data) => {
-      if (!product_id) {
-        throw new Error('Invalid product id')
+      if (!data) {
+        response.send(404)
+      } else {
+        res.status(200).json(data)
       }
-      res.status(200).json(data)
     })
-    .catch(err => res.status(404).send(err.message))
+    .catch(err => res.status(500).send(err.message, 'error fetching styles'))
 })
 
-app.get('/products/:product_id/styles', (req, res) => {
-  const product_id = Number(req.params.product_id);
+app.get('/products/:product_id/related', (req, res) => {
+  const product_id = req.params.product_id;
 
   getRelated(product_id)
     .then((data) => {
-      if (!product_id) {
-        throw new Error('Invalid product id')
+      if (!data) {
+        response.send(404)
+      } else {
+        res.status(200).json(data)
       }
-      res.status(200).json(data)
     })
-    .catch(err => res.status(404).send(err.message))
+    .catch(err => res.status(500).send(err.message, 'error fetching related products'))
 })
 
-app.listen(process.env.PORT);
-console.log(`Listening at http://localhost:${process.env.PORT}`);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT);
+console.log(`Listening at http://localhost:${PORT}`);
