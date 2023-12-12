@@ -11,6 +11,20 @@ db
     console.log(err);
   });
 
+const getProducts = (count, page) => {
+  return Products.find();
+}
+const getProductData = (product_id) => {
+  return db.collection('productFeatures')
+    .find({ "product_id": product_id })
+}
+const getStyles = (product_id) => {
+  return db.collection('productsStyles')
+  .find({ "product_id": product_id })
+}
+const getRelated = (product_id) => {
+  return db.collection('related')
+  .find({ "product_id": product_id })
+}
 
-
-module.exports = db;
+module.exports = { db, getProducts, getProductData, getStyles, getRelated };
