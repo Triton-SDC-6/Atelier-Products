@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -60,8 +61,5 @@ app.get('/products/:product_id/styles', (req, res) => {
     .catch(err => res.status(404).send(err.message))
 })
 
-let port = 1128;
-
-app.listen(port, function() {
-  console.log(`listening on port ${port}`);
-});
+app.listen(process.env.PORT);
+console.log(`Listening at http://localhost:${process.env.PORT}`);
