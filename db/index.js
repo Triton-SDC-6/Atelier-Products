@@ -1,8 +1,8 @@
 require('dotenv').config();
-const Products = require('./Products');
-const ProductsFeatures = require('./ProductsFeatures');
-const Styles = require('./Styles');
-const Related = require('./Related');
+// const Products = require('./models/Products');
+// const ProductsFeatures = require('./models/ProductsFeatures');
+// const Styles = require('./models/Styles');
+// const Related = require('./models/Related');
 const mongoose = require('mongoose');
 
 const mongoURI = 'mongodb://localhost:27017/atelier';
@@ -16,17 +16,17 @@ db
     console.log(err);
   });
 
-const getProducts = (count, page) => {
-  return Products.find().sort({id: 1}).limit(count)
-}
-const getProductData = (product_id) => {
-  return ProductsFeatures.findOne({ id: product_id }, {_id: 0})
-}
-const getStyles = (product_id) => {
-  return Styles.find({ id: product_id })
-}
-const getRelated = (product_id) => {
-  return Related.find({ id: product_id })
-}
+// const getProducts = (count, page) => {
+//   return Products.find().sort({id: 1}).limit(count)
+// }
+// const getProductData = (product_id) => {
+//   return ProductsFeatures.findOne({ id: product_id }, {_id: 0})
+// }
+// const getStyles = (product_id) => {
+//   return Styles.find({ id: product_id })
+// }
+// const getRelated = (product_id) => {
+//   return Related.find({ id: product_id })
+// }
 
-module.exports = { db, getProducts, getProductData, getStyles, getRelated };
+module.exports = db;

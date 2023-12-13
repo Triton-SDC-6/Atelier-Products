@@ -1,23 +1,32 @@
-require("dotenv").config();
-const express = require('express');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const path = require('path');
-const db = require('../db');
-// const Products = require('../db/Products');
-// const Styles = require('../db/Styles');
-const contollers = require('./controllers/products.js');
+const Products = require('../../db/models/Products');
+const ProductsFeatures = require('../../db/models/ProductsFeatures');
+const Styles = require('../../db/models/Styles');
+const Related = require('../../db/models/Related');
 
-const app = express();
-app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../client/dist')));
+const getProducts = (count, page) => {
+  return Products.find().sort({id: 1}).limit(count)
+}
 
-app.get('/products', contollers.getProducts)
-app.get('/products/:product_id', contollers.getProductData)
-app.get('/products/:product_id/styles', contollers.getStyles)
-app.get('/products/:product_id/related', contollers.getRelated)
+const getProductData = (req, res) => {
+  const product_id = req.params.product_id;
+  return ProductsFeatures.findOne({ id: product_id }, {_id: 0})
+    .then((data) => {
+      if (!data) {
+        // maybe throw
+        res.send(404)
+      } else {
+        res.status(200).json(data)
+      }
+    })
+    .catch(err => res.status(500).send(err.message))
+}
 
+const getStyles = (product_id) => {
+  return Styles.find({ id: product_id })
+}
+const getRelated = (product_id) => {
+  return Related.find({ id: product_id })
+}
 
 // app.get('/products', (req, res) => {
 //   const page = req.query.page || 1;
@@ -72,7 +81,4 @@ app.get('/products/:product_id/related', contollers.getRelated)
 //     .catch(err => res.status(500).send(err.message, 'error fetching related products'))
 // })
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT);
-console.log(`Listening at http://localhost:${PORT}`);
+module.exports = { getProducts, getProductData, getStyles, getRelated };
