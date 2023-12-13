@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 // const mongoURI = 'mongodb://localhost:27017/atelier';
 const mongoURI = process.env.MONGODB_URI;
 
+(mongoURI);
+
 const db = mongoose.connect(mongoURI, { useNewUrlParser: true });
 
 db
