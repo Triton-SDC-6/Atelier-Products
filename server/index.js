@@ -4,7 +4,6 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('../db');
-const loaderio = require('../loaderio.txt');
 // const Products = require('../db/Products');
 // const Styles = require('../db/Styles');
 const contollers = require('./controllers/products.js');
