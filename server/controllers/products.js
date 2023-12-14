@@ -28,6 +28,10 @@ const getRelated = (product_id) => {
   return Related.find({ id: product_id })
 }
 
+// const getLoader = () => {
+//   return
+// }
+
 // app.get('/products', (req, res) => {
 //   const page = req.query.page || 1;
 //   const count = req.query.count || 5;

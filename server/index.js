@@ -17,7 +17,9 @@ app.get('/products', contollers.getProducts)
 app.get('/products/:product_id', contollers.getProductData)
 app.get('/products/:product_id/styles', contollers.getStyles)
 app.get('/products/:product_id/related', contollers.getRelated)
-app.get('/loaderio-f5fdc25c4ec95398fc5683981c4c9195.txt', process.env.LOADER_IO)
+app.get('/loaderio-f5fdc25c4ec95398fc5683981c4c9195', () => {
+  return LOADER_IO
+})
 
 
 // app.get('/products', (req, res) => {
