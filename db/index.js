@@ -5,10 +5,11 @@ require('dotenv').config();
 // const Related = require('./models/Related');
 const mongoose = require('mongoose');
 
-const mongoURI = 'mongodb://localhost:27017/atelier';
-// const mongoURI = process.env.MONGODB_URI;
+// const mongoURI = 'mongodb://localhost:27017/atelier';
+const mongoURI = process.env.MONGODB_URI;
 
-// (mongoURI);
+console.log('process.env.MONGODB_URI:', process.env.MONGODB_URI)
+console.log('const mongoURI:', mongoURI)
 
 const db = mongoose.connect(mongoURI, { useNewUrlParser: true });
 
