@@ -17,8 +17,8 @@ app.get('/products', contollers.getProducts)
 app.get('/products/:product_id', contollers.getProductData)
 app.get('/products/:product_id/styles', contollers.getStyles)
 app.get('/products/:product_id/related', contollers.getRelated)
-app.get('/loaderio-f5fdc25c4ec95398fc5683981c4c9195/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../loaderio-f5fdc25c4ec95398fc5683981c4c9195.txt'))
+app.get('/loaderio-4144e7b9da2201ca710888fd3e7f5cf3/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../loaderio-4144e7b9da2201ca710888fd3e7f5cf3.txt'))
 })
 
 // app.get('/products', (req, res) => {
